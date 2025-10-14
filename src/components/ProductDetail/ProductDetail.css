@@ -1,0 +1,58 @@
+.product-detail-container {
+  max-width: 900px;           /* ancho máximo de la sección */
+  margin: 2rem auto;           /* centra horizontalmente */
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.product-detail-image {
+  flex: 1 1 300px;            /* ocupa al menos 300px, crece según espacio */
+  max-width: 400px;
+  height: 400px;
+  object-fit: cover;           /* recorta la imagen si es necesario sin distorsión */
+  border-radius: 12px;
+}
+
+.product-detail-info {
+  flex: 1 1 300px;            /* ocupa al menos 300px, crece según espacio */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.product-detail-info h2 {
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.product-detail-info p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.product-detail-info .precio {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.product-detail-info button {
+  padding: 0.7rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #28a745;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.product-detail-info button:hover {
+  background-color: #218838;
+}

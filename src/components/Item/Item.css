@@ -1,0 +1,31 @@
+.item-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 16px;
+  background: white;
+  text-align: center;
+  transition: transform 0.2s;
+}
+.item-card:hover {
+  transform: scale(1.02);
+}
+.item-card .precio {
+  font-weight: bold;
+  color: #0077cc;
+}
+.btn {
+  background: #0077cc;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+.btn:hover { background: #005fa3; }
+
+.item-image {
+  width: 200px;       /* ancho fijo */
+  height: 200px;      /* alto fijo */
+  object-fit: cover;  /* mantiene proporción y recorta exceso */
+  border-radius: 8px;
+}
+

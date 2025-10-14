@@ -1,0 +1,38 @@
+:root {
+  /* 🎨 Paleta de colores refinada */
+  --color-primary: #007bff;
+  --color-primary-dark: #0056b3;
+  --color-secondary: #1e293b;
+  --color-bg: #f8fafc;
+  --color-text: #1e293b;
+  --color-border: #e2e8f0;
+  --color-light: #ffffff;
+
+  /* ✏️ Tipografía base */
+  --font-family-base: 'Inter', Arial, Helvetica, sans-serif;
+  --font-size-base: 16px;
+  --line-height-base: 1.6;
+
+  /* 🧱 Sombras y bordes */
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --radius-base: 8px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 🔹 Contenedor general */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
