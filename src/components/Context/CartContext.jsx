@@ -1,12 +1,10 @@
 import { createContext, useContext, useState } from "react";
 
-// 1️⃣ Crear el contexto
+// desde aca creo el contexto del carrito
 const CartContext = createContext();
-
-// 2️⃣ Hook personalizado para usar el contexto fácilmente
 export const useCart = () => useContext(CartContext);
 
-// 3️⃣ Proveedor del carrito
+// Con esto envio los articulos al carrito del carrito
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
@@ -23,7 +21,7 @@ export const CartProvider = ({ children }) => {
             : item
         );
       } else {
-        // Si no existe, lo agregamos
+        // de no existir, lo agregamos con cantidad 1
         return [...prevCart, { ...product, quantity: 1 }];
       }
     });
@@ -31,7 +29,7 @@ export const CartProvider = ({ children }) => {
     alert(`✅ "${product.nombre}" fue agregado al carrito`);
   };
 
-  // Eliminar producto
+  // Esto me permite Eliminar productos del carrito
   const removeFromCart = (id) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
     alert("❌ Producto eliminado del carrito");
@@ -42,7 +40,7 @@ export const CartProvider = ({ children }) => {
     setCart([]);
     alert("🛒 Carrito vaciado");
   };
-
+//Y aca retorna el proveedor del carrito
   return (
     <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, totalItems }}>
   {children}
