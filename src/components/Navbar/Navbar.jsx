@@ -1,17 +1,27 @@
-import './Navbar.css';
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { useCart } from "../Context/CartContext"; // 🛒 importamos el carrito
+import "./Navbar.css";
 
-const Navbar = () => (
-  <nav className="navbar">
-    <ul>
-      <li><Link to="/">Inicio</Link></li>
-      <li><a href="#">Contacto</a></li>
-      <li><a href="#">Sobre Nosotros</a></li>
-      <li><a href="#">Encuesta</a></li>
-      <li><Link to="/agregar">Agregar Producto</Link></li>
-      
-    </ul>
-  </nav>
-);
+const Navbar = () => {
+  const { totalItems } = useCart(); // 🔢 obtenemos el total de productos
+
+  return (
+    <nav className="navbar">
+      <h1 className="logo">Mi Tienda</h1>
+      <ul className="nav-links">
+        <li><Link to="/">Productos</Link></li>
+        <li><Link to="/contacto">Contacto</Link></li>
+
+        {/* 🛒 Sección del carrito */}
+        <li className="nav-cart">
+          <Link to="/cart">
+            🛒 <span className="cart-count">{totalItems.toLocaleString("en-US")}
+            </span>
+          </Link>
+        </li>
+      </ul>
+    </nav>
+  );
+};
 
 export default Navbar;

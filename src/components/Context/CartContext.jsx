@@ -1,30 +1,52 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
 
+// 1️⃣ Crear el contexto
 const CartContext = createContext();
 
+// 2️⃣ Hook personalizado para usar el contexto fácilmente
+export const useCart = () => useContext(CartContext);
+
+// 3️⃣ Proveedor del carrito
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState(() => {
-    const savedCart = localStorage.getItem("cart");
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
+  const [cart, setCart] = useState([]);
+  const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
 
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
-
+  // Agregar producto
   const addToCart = (product) => {
-    const existing = cart.find(item => item.id === product.id);
-    if (existing) {
-      setCart(cart.map(item => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item));
-    } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
-    }
+    setCart((prevCart) => {
+      const existing = prevCart.find((item) => item.id === product.id);
+      if (existing) {
+        // Si ya existe, aumentamos cantidad
+        return prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        // Si no existe, lo agregamos
+        return [...prevCart, { ...product, quantity: 1 }];
+      }
+    });
+
+    alert(`✅ "${product.nombre}" fue agregado al carrito`);
   };
 
-  const removeFromCart = (id) => setCart(cart.filter(item => item.id !== id));
-  const clearCart = () => setCart([]);
+  // Eliminar producto
+  const removeFromCart = (id) => {
+    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+    alert("❌ Producto eliminado del carrito");
+  };
 
-  return <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>{children}</CartContext.Provider>;
+  // Vaciar carrito
+  const clearCart = () => {
+    setCart([]);
+    alert("🛒 Carrito vaciado");
+  };
+
+  return (
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, totalItems }}>
+  {children}
+    </CartContext.Provider>
+    
+  );
 };
-
-export const useCart = () => useContext(CartContext);

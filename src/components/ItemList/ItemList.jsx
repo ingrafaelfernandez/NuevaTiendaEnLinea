@@ -1,7 +1,10 @@
-import ItemCard from "../ItemCard/ItemCard"; // componente que solo renderiza un Item
+import { useProductos } from "../Context/ProductContext";
+import ItemCard from "../ItemCard/ItemCard";
 import "./ItemList.css";
 
-const ItemList = ({ productos }) => {
+const ItemList = () => {
+  const { productos } = useProductos();
+
   return (
     <div className="item-list">
       {productos.map((producto) => (
