@@ -1,26 +1,41 @@
 import { useState } from "react";
 
+// Base ID para productos fijos (10000+) para evitar conflicto con IDs de API
+const FIXED_PRODUCT_BASE_ID = 10000;
+
 export const initialProducts = [
   {
-    id: 1,
+    id: FIXED_PRODUCT_BASE_ID + 1,
     nombre: "Laptop ASUS",
+    name: "Laptop ASUS",
     descripcion: "Potente laptop para trabajo y estudio.",
+    description: "Potente laptop para trabajo y estudio.",
     precio: 1200,
-    imagen: "/src/assets/products/laptop-asus.jpg",
+    price: 1200,
+    image: "/src/assets/Products/laptop-asus.jpg",
+    imageUrl: "/src/assets/Products/laptop-asus.jpg",
   },
   {
-    id: 2,
+    id: FIXED_PRODUCT_BASE_ID + 2,
     nombre: "Mouse Gamer",
+    name: "Mouse Gamer",
     descripcion: "Sensor óptico de alta precisión.",
+    description: "Sensor óptico de alta precisión.",
     precio: 40,
-    imagen: "/src/assets/products/mouse-gamer.jpg",
+    price: 40,
+    image: "/src/assets/Products/mouse-gamer.jpg",
+    imageUrl: "/src/assets/Products/mouse-gamer.jpg",
   },
   {
-    id: 3,
+    id: FIXED_PRODUCT_BASE_ID + 3,
     nombre: "Teclado Mecánico RGB",
+    name: "Teclado Mecánico RGB",
     descripcion: "Teclado gamer retroiluminado con switches azules.",
+    description: "Teclado gamer retroiluminado con switches azules.",
     precio: 50,
-    imagen: "/src/assets/products/teclado.jpg",
+    price: 50,
+    image: "/src/assets/Products/teclado.jpg",
+    imageUrl: "/src/assets/Products/teclado.jpg",
   },
 ];
 
@@ -34,3 +49,5 @@ export const useItems = () => {
 
   return { productos, agregarProducto };
 };
+
+export { FIXED_PRODUCT_BASE_ID };

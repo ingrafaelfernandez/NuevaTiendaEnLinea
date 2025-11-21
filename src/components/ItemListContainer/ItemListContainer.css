@@ -1,20 +1,104 @@
-.item-list-container {
-  padding: 2rem;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 2rem;
   background-color: #f9f9f9;
-  min-height: 100vh;
+  min-height: calc(100vh - var(--header-height) - var(--navbar-height) - 200px);
 }
 
-.item-list-container h2 {
+.list-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.btn-back {
+  align-self: flex-start;
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+  background-color: #e55a00;
+  transform: translateX(-5px);
+}
+
+.btn-back:active {
+  transform: translateX(-5px) scale(0.98);
+}
+
+.container h1 {
+  font-size: 2.2rem;
+  color: #222;
   text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
   margin-bottom: 2rem;
-  color: #333;
+  border-bottom: 3px solid #ff6600;
+  padding-bottom: 0.5rem;
 }
 
-.item-grid {
+.item-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  justify-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1400px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .item-list {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 2rem 1rem;
+  }
+
+  .list-header {
+    gap: 0.8rem;
+  }
+
+  .btn-back {
+    align-self: stretch;
+    text-align: center;
+  }
+
+  .container h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .item-list {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .item-list {
+    grid-template-columns: 1fr;
+  }
+
+  .container h1 {
+    font-size: 1.5rem;
+  }
+
+  .btn-back {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
 }

@@ -7,10 +7,10 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <h1 className="logo">Mi Tienda</h1>
+      <h1 className="logo"><Link to="/">Inicio</Link></h1>
       <ul className="nav-links">
         <li><Link to="/">Productos</Link></li>
-        <li><Link to="/contacto">Contacto</Link></li>
+        <li><Link to="/categories">Categorías</Link></li>
 
         {/* 🛒 Sección del carrito */}
         <li className="nav-cart">

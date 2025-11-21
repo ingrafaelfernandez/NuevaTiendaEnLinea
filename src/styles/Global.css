@@ -16,6 +16,9 @@
   /* 🧱 Sombras y bordes */
   --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.05);
   --radius-base: 8px;
+  /* alturas fijas para layout */
+  --header-height: 64px;
+  --navbar-height: 56px;
 }
 
 body {
@@ -27,6 +30,49 @@ body {
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Layout: footer sticky (footer siempre en la parte inferior) */
+html, body, #root {
+  height: 100%;
+}
+
+.app {
+  min-height: 100vh; /* ocupa al menos la pantalla */
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1; /* el contenido principal crece y empuja el footer hacia abajo */
+  display: block;
+  /* espacio superior para header y navbar fijos */
+  padding-top: calc(var(--header-height) + var(--navbar-height));
+}
+
+/* Ajustes para pantallas pequeñas: reducir alturas del header y navbar */
+@media (max-width: 600px) {
+  :root {
+    --header-height: 56px;
+    --navbar-height: 48px;
+  }
+
+  .content {
+    padding-top: calc(var(--header-height) + var(--navbar-height));
+  }
+}
+
+/* Mensaje de éxito global reutilizable */
+.success-message {
+  background-color: #e6ffed;
+  color: #205522;
+  border: 1px solid #c7f0d0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 0 auto 12px auto;
+  max-width: 720px;
+  font-weight: 600;
 }
 
 /* 🔹 Contenedor general */

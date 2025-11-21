@@ -1,3 +1,10 @@
+/*
+  Context: CartContext
+  Propósito: Mantener el estado del carrito (items, agregar, eliminar, vaciar)
+  Conexiones:
+    - `addToCart` usado por `ProductDetail` y otros componentes para agregar productos
+    - `Cart` consume este contexto para mostrar contenidos y acciones
+*/
 import { createContext, useContext, useState } from "react";
 
 // desde aca creo el contexto del carrito
@@ -26,7 +33,9 @@ export const CartProvider = ({ children }) => {
       }
     });
 
-    alert(`✅ "${product.nombre}" fue agregado al carrito`);
+    // Manejo flexible de nombre del producto
+    const productName = product.nombre || product.name || "Producto";
+    alert(`✅ "${productName}" fue agregado al carrito`);
   };
 
   // Esto me permite Eliminar productos del carrito
