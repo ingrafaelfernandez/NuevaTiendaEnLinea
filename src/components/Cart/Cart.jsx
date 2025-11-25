@@ -86,15 +86,6 @@ export const Cart = () => {
             <span>${totalPrice.toFixed(2)}</span>
           </div>
 
-          <div className="cart-actions">
-            <button className="btn-clear" onClick={clearCart}>
-              Vaciar Carrito
-            </button>
-            <button className="btn-checkout">
-              Proceder al Pago
-            </button>
-          </div>
-
             <div className="cart-actions">
               <button className="btn-clear" onClick={clearCart}>
                 Vaciar Carrito

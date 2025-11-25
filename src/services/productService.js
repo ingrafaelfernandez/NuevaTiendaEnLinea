@@ -1,8 +1,17 @@
-// Servicio para crear un producto en la API (mockapi)
+// Servicio para interactuar con la API (MockAPI)
 const API_BASE = "https://6900bbf2ff8d792314bb353b.mockapi.io/Products";
 
+export const getProducts = async () => {
+  const response = await fetch(API_BASE);
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`Error obteniendo productos: ${response.status} ${text}`);
+  }
+  const json = await response.json();
+  return json;
+};
+
 export const createProduct = async (productData) => {
-  // productData debe contener los campos esperados por la API
   const response = await fetch(API_BASE, {
     method: "POST",
     headers: {

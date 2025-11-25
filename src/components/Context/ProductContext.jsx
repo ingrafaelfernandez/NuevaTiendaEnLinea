@@ -8,8 +8,8 @@
     - Consumido por `ItemListContainer`, `ProductDetail`, `ItemList` y otros componentes que necesiten productos
 */
 import { createContext, useContext, useEffect, useState } from "react";
-import initialProducts from "../Item/Item";
-import productService from "../../services/productService";
+import { initialProducts } from "../Item/Item";
+import { getProducts } from "../../services/productService";
 
 /*
   Contexto: ProductContext
@@ -27,7 +27,7 @@ export const ProductProvider = ({ children }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const apiProducts = await productService.getProducts();
+        const apiProducts = await getProducts();
         const normalized = apiProducts.map((p) => ({
           ...p,
           name: p.name || p.nombre,
@@ -35,7 +35,16 @@ export const ProductProvider = ({ children }) => {
           imageUrl: p.imageUrl || p.imagen || p.image || p.imageUrl,
           category: p.category || p.categoria,
         }));
-        setProducts((prev) => [...prev, ...normalized]);
+        setProducts((prev) => {
+          // Unir prev + normalized y eliminar duplicados por id (usa string para normalizar)
+          const combined = [...prev, ...normalized];
+          const byId = {};
+          combined.forEach((p) => {
+            const key = String(p.id ?? p.name ?? Math.random());
+            byId[key] = p;
+          });
+          return Object.values(byId);
+        });
       } catch (err) {
         console.error("Error fetching products", err);
       }
@@ -53,11 +62,3 @@ export const ProductProvider = ({ children }) => {
 export const useProducts = () => useContext(ProductContext);
 
 export default ProductContext;
-  return (
-    <ProductContext.Provider value={{ productos, agregarProducto }}>
-      {children}
-    </ProductContext.Provider>
-  );
-};
-
-export const useProductos = () => useContext(ProductContext);

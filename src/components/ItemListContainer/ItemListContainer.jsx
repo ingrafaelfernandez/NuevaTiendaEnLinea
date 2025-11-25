@@ -9,7 +9,7 @@
 import { useState, useEffect } from "react";
 import ItemList from "../ItemList/ItemList";
 import { useParams, useNavigate } from "react-router-dom";
-import { useProductos } from "../Context/ProductContext";
+import { useProducts } from "../Context/ProductContext";
 
 import "./ItemListContainer.css";
 
@@ -17,20 +17,20 @@ export const ItemListContainer = ({ titulo = "Catálogo de Productos" }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const { category } = useParams();
   const navigate = useNavigate();
-  const { productos } = useProductos();
+  const { products } = useProducts();
 
   useEffect(() => {
     // Si hay categoría, filtrar productos por categoría
     if (category) {
-      const filtered = productos.filter(
+      const filtered = products.filter(
         (p) => (p.category || p.categoria) === category
       );
       setFilteredProducts(filtered);
     } else {
       // Si no hay categoría, mostrar todos
-      setFilteredProducts(productos);
+      setFilteredProducts(products);
     }
-  }, [productos, category]);
+  }, [products, category]);
 
   return (
     <section className="container">

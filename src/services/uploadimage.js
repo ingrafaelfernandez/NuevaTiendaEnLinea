@@ -1,18 +1,12 @@
 // Esta funcion la hacemos para solucionar el problema de mockAPI que no permite
 // subir imagenes: subimos imagenes a imgbb y devuelve una URL publica.
-// Luego esa URL la usamos para mockAPI 😉
-//
-// ⚠️ Importante: esta clave queda expuesta en el cliente.
-//     Para prácticas esta ok, pero no es ideal para ambientes reales.
+// Luego esa URL la usamos para mockAPI
 
-const IMGBB_API_KEY = "https:// 6900bbf2ff8d792314bb353b.mockapi.io/products"; //👈reemplazan por la suya
+const IMGBB_API_KEY = "https:// 6900bbf2ff8d792314bb353b.mockapi.io/products"; 
 const ENDPOINT = "https://api.imgbb.com/1/upload";
 
 // Funcion con la que vamos a convertir la imagen (File) a cadena base64
-// Base64 es una codificacion de texto que representa datos binarios (la imagen)
-// El navegador genera un Data URL del estilo:
-//    "data:image/png;base64,AAAA...."
-// Para imgbb, hay que enviar **solo la parte base64** (sin el prefijo "data:...").
+
 
 export const fileToBase64 = (file) => {
   return new Promise((resolve, reject) => {
@@ -87,6 +81,6 @@ export const uploadToImgbb = async (file) => {
     }
   }
 
-  // Si llegamos acá, no recibimos los campos esperados
+  // Si llegamos acá, es porque no recibimos los campos esperados
   throw new Error("No se recibió una URL válida desde imgbb");
 };

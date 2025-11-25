@@ -8,21 +8,21 @@
   Notas: Maneja propiedades flexibles de producto (soporta tanto productos fijos como los de la API).
 */
 import { useParams, Link } from "react-router-dom";
-import { useProductos } from "../Context/ProductContext";
+import { useProducts } from "../Context/ProductContext";
 import { useCart } from "../Context/CartContext"; // 🛒 importamos el carrito
 import "./ProductDetail.css";
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const { productos } = useProductos();
+  const { products } = useProducts();
   const { addToCart } = useCart(); // 🛒 obtenemos la función para agregar al carrito
 
   // Buscar producto por ID (convertir ambos a número para comparación consistente)
   const idNum = Number(id);
-  const producto = productos.find((p) => Number(p.id) === idNum);
+  const producto = products.find((p) => Number(p.id) === idNum);
 
   if (!producto) {
-    console.error("Producto no encontrado. ID buscado:", id, "Productos disponibles:", productos.map(p => ({ id: p.id, tipo: typeof p.id })));
+    console.error("Producto no encontrado. ID buscado:", id, "Productos disponibles:", products.map(p => ({ id: p.id, tipo: typeof p.id })));
     return (
       <div className="product-detail">
         <p>Producto no encontrado</p>

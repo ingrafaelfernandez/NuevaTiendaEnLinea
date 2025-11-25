@@ -1,12 +1,4 @@
-/*
-  Componente: ProductFormContainer (Container)
-  Propósito: Manejar la lógica del formulario de creación de productos (validación, subida de imagen, POST a MockAPI)
-  Conexiones:
-    - `ProductFormUI`: componente presentacional que renderiza el formulario
-    - `useAdminProducts` (AdminProductContext): agrega el producto a la lista de sesión administrativa
-    - `uploadImage` (utils): sube la imagen a imgbb y devuelve `imageUrl`
-    - `createProduct` (services/productService): crea el producto en MockAPI
-*/
+
 import { useState, useEffect } from "react";
 import { ProductFormUI } from "../ProductFormUI/ProductFormUI";
 import { useAdminProducts } from "../../Context/AdminProductContext";
@@ -124,3 +116,14 @@ export const ProductFormContainer = () => {
 );
     
 };
+
+/*
+Nota de documentación:
+  Componente: ProductFormContainer
+  Cual es el proposito: Manejar la lógica del formulario de creación de productos (validación, subida de imagen a MockAPI)
+  Conexiones:
+    1 `ProductFormUI`: componente presentacional que renderiza el formulario
+    2 `useAdminProducts` (AdminProductContext): agrega el producto a la lista de sesión administrativa
+    3 `uploadImage` (utils): sube la imagen a imgbb y devuelve `imageUrl`
+    4 `createProduct` (services/productService): crea el producto en MockAPI
+*/
