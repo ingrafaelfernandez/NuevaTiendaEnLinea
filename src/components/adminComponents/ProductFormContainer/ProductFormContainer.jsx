@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { ProductFormUI } from "../ProductFormUI/ProductFormUI";
 import { useAdminProducts } from "../../../Context/AdminProductContext/AdminProductContext";
+import { useProducts } from "../../../Context/ProductContext";
 import { validateProduct } from "../../../utils/validateProducts";
 import { uploadImage } from "../../../utils/uploadImage";
 import { createProduct } from "../../../services/productService";
@@ -13,6 +14,7 @@ export const ProductFormContainer = () => {
   const [success, setSuccess] = useState("");
     const [errors, setErrors] = useState({});
     const { addSessionProduct } = useAdminProducts();
+    const { setProducts } = useProducts();
     const [product, setProduct] = useState({
       name: "",
       price: "",
@@ -70,7 +72,6 @@ export const ProductFormContainer = () => {
 
         const created = await createProduct(productData);
         console.log('Producto creado en MockAPI:', created);
-        
         const productUrl = created && created.id ? `https://6900bbf2ff8d792314bb353b.mockapi.io/Products/${created.id}` : "";
         setSuccess(
           `✅ Producto creado exitosamente. Ver: ${productUrl}`
@@ -84,6 +85,19 @@ export const ProductFormContainer = () => {
           description: product.description,
           imageUrl: imageUrl,
         });
+        // Actualizar el ProductContext para que la UI pública refleje el nuevo producto
+        try {
+          const normalized = {
+            ...created,
+            name: created.name || created.nombre || product.name,
+            price: created.price || created.precio || Number(product.price),
+            imageUrl: created.imageUrl || created.imagen || created.image || imageUrl,
+            category: created.category || created.categoria || product.category,
+          };
+          setProducts((prev) => [...prev, normalized]);
+        } catch (err) {
+          console.warn('No se pudo actualizar ProductContext automáticamente:', err);
+        }
         
         // limpiar formulario
         setProduct({ name: "", price: "", category: "", description: "" });
