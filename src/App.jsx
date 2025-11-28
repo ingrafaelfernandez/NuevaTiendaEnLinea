@@ -10,7 +10,7 @@ import ProductDetail from "./components/ProductDetail/ProductDetail";
 import Categories from "./components/Categories/Categories";
 import { ProductFormContainer } from "./components/adminComponents/ProductFormContainer/ProductFormContainer";
 import { Cart } from "./components/Cart/Cart";
-import Checkout from "./components/Checkout/Checkout";
+import Checkout from "./Checkout/Checkout";
 import { AdminLayaouts } from "./layaouts/AdminLayaouts";
 import { Login } from "./components/Login/Login";
 

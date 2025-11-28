@@ -8,8 +8,8 @@
   Notas: Maneja propiedades flexibles de producto (soporta tanto productos fijos como los de la API).
 */
 import { useParams, Link } from "react-router-dom";
-import { useProducts } from "../Context/ProductContext";
-import { useCart } from "../Context/CartContext"; // 🛒 importamos el carrito
+import { useProducts } from "../../Context/ProductContext";
+import { useCart } from "../../Context/CartContext/CartContext"; // 🛒 importamos el carrito
 import "./ProductDetail.css";
 
 const ProductDetail = () => {

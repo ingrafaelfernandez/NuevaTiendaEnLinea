@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { ProductFormUI } from "../ProductFormUI/ProductFormUI";
-import { useAdminProducts } from "../../Context/AdminProductContext";
+import { useAdminProducts } from "../../../Context/AdminProductContext/AdminProductContext";
 import { validateProduct } from "../../../utils/validateProducts";
 import { uploadImage } from "../../../utils/uploadImage";
 import { createProduct } from "../../../services/productService";

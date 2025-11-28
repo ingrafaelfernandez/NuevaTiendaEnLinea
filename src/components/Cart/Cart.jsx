@@ -9,7 +9,7 @@
 */
 import { Link } from "react-router-dom";
 import "./Cart.css";
-import { useCart } from "../Context/CartContext";
+import { useCart } from "../../Context/CartContext/CartContext";
 
 export const Cart = () => {
   const { cart, removeFromCart, clearCart } = useCart();

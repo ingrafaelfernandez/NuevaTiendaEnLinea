@@ -6,7 +6,7 @@
     - Se muestra debajo del formulario de administración dentro de `AdminLayaouts`.
 */
 import './AdminProductsList.css';
-import { useAdminProducts } from '../../Context/AdminProductContext';
+import { useAdminProducts } from '../../../Context/AdminProductContext/AdminProductContext';
 
 export const AdminProductsList = () => {
   const { sessionProducts, clearSessionProducts } = useAdminProducts();

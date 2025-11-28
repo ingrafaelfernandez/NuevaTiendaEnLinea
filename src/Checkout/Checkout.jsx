@@ -7,7 +7,7 @@
     - Estilos en `Checkout.css`
 */
 import { useState } from "react";
-import { useCart } from "../Context/CartContext";
+import { useCart } from "../Context/CartContext/CartContext";
 import { Link } from "react-router-dom";
 import "./Checkout.css";
 

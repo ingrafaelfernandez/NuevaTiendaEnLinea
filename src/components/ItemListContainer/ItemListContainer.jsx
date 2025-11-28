@@ -9,7 +9,7 @@
 import { useState, useEffect } from "react";
 import ItemList from "../ItemList/ItemList";
 import { useParams, useNavigate } from "react-router-dom";
-import { useProducts } from "../Context/ProductContext";
+import { useProducts } from "../../Context/ProductContext";
 
 import "./ItemListContainer.css";
 
