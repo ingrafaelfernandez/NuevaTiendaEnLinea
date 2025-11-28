@@ -1,15 +1,16 @@
 import { createContext, useState, useContext } from "react";
-import productosIniciales from "../Item/Item";
 
+// ItemsContext: mantenía una lista local; para alinear con la política
+// actual, inicializamos vacío y dejamos la gestión principal en ProductContext
 const ItemsContext = createContext();
 
 export const ItemsProvider = ({ children }) => {
-  const [productos, setProductos] = useState(productosIniciales);
+  const [productos, setProductos] = useState([]);
 
   const agregarProducto = (producto) => {
-    setProductos(prev => [
+    setProductos((prev) => [
       ...prev,
-      { id: prev.length + 1, ...producto }
+      { id: Date.now(), ...producto },
     ]);
   };
 

@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
 import Navbar from "../components/Navbar/Navbar"
-import { AdminProductProvider } from "../components/Context/AdminProductContext"
+import { AdminProductProvider } from "../Context/AdminProductContext/AdminProductContext"
 import AdminProductsList from "../components/adminComponents/AdminProductsList/AdminProductsList"
 
 export const AdminLayaouts = () => {

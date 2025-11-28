@@ -1,6 +1,6 @@
 import ".//styles/Global.css";
 import { Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./components/Context/AuthContext";
+import { AuthProvider } from "./Context/AuthContext/AuthProvider";
 
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";

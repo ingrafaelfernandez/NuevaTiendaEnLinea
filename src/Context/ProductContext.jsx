@@ -8,8 +8,7 @@
     - Consumido por `ItemListContainer`, `ProductDetail`, `ItemList` y otros componentes que necesiten productos
 */
 import { createContext, useContext, useEffect, useState } from "react";
-import { initialProducts } from "../Item/Item";
-import { getProducts } from "../../services/productService";
+import { getProducts } from "../services/productService";
 
 /*
   Contexto: ProductContext
@@ -22,7 +21,8 @@ import { getProducts } from "../../services/productService";
 const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
-  const [products, setProducts] = useState(initialProducts);
+  // Inicializamos vacío: la fuente única será la MockAPI (persistente)
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
