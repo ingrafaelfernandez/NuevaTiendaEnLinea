@@ -1,7 +1,13 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* Tipografía global y variables base */
+  --font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-size-base: 16px;
+  --line-height-base: 1.5;
+  --font-weight-base: 400;
+
+  font-family: var(--font-family);
+  line-height: var(--line-height-base);
+  font-weight: var(--font-weight-base);
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -30,6 +36,16 @@ body {
   min-height: 100vh;
 }
 
+/* Aplicar tamaño base de fuente usando la variable para coherencia */
+html, body { font-size: var(--font-size-base); }
+
+/* Box sizing and prevent horizontal overflow */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { overflow-x: hidden; width: 100%; }
+
+/* Ensure main containers don't exceed viewport width */
+.container, .cart-container, .checkout-wrapper, .item-list, .item-grid { max-width: 100%; }
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -52,6 +68,14 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Reducir padding y tamaños en pantallas muy pequeñas para mantener coherencia con Cart/Checkout */
+@media (max-width: 480px) {
+  :root { --font-size-base: 15px; }
+  h1 { font-size: 1.8em; }
+  button { padding: 0.5rem 0.9rem; font-size: 0.95rem; }
+  .container { padding: 1.25rem; }
 }
 
 @media (prefers-color-scheme: light) {

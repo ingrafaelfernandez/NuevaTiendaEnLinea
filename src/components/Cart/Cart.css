@@ -81,6 +81,9 @@
   flex-shrink: 0;
 }
 
+/* Make images responsive on very small screens */
+.cart-item-image { max-width: 100%; height: auto; }
+
 .cart-item-info {
   flex: 1;
   min-width: 150px;
@@ -133,6 +136,22 @@
   height: fit-content;
 }
 
+/* Responsive form helpers inside cart summary */
+.cart-summary form,
+.cart-summary .form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.cart-summary input,
+.cart-summary select,
+.cart-summary textarea,
+.cart-summary button {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
 .cart-summary h3 {
   font-size: 1.3rem;
   color: #222;
@@ -165,18 +184,25 @@
   display: flex;
   gap: 1rem;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 
 .btn-clear,
 .btn-checkout {
   flex: 1;
+  min-width: 0; /* allow flex items to shrink without overflowing */
+  box-sizing: border-box;
   padding: 0.8rem 1rem;
   border: none;
   border-radius: 8px;
-  font-weight: 600;
+  font-weight: 400;
   cursor: pointer;
   transition: all 0.25s ease;
   font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
 
 .btn-clear {
@@ -253,6 +279,19 @@
     flex-wrap: wrap;
   }
 
+  /* Ensure cart summary and its contents take full width and form elements are comfortable */
+  .cart-summary {
+    width: 100%;
+    padding: 1.25rem;
+  }
+
+  .cart-summary input,
+  .cart-summary select,
+  .cart-summary textarea {
+    font-size: 1rem;
+    padding: 0.6rem;
+  }
+
   .cart-item-image {
     width: 100px;
     height: 100px;
@@ -307,5 +346,17 @@
 
   .summary-row.total {
     font-size: 1.1rem;
+  }
+
+  /* Reducir padding y tamaño del botón 'Ir a pagar' en pantallas muy pequeñas */
+  .btn-checkout {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.88rem;
+  }
+
+  /* Ajuste similar para botones del bloque de acciones si es necesario */
+  .btn-clear {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.88rem;
   }
 }

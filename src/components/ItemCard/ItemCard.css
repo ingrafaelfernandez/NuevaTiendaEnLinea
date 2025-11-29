@@ -71,6 +71,12 @@
   transform: translateY(0);
 }
 
+/* Botón añadir al carrito - estilo secundario terso */
+.item-actions{ display:flex; gap:0.6rem; align-items:center; justify-content:center }
+.btn-add{ background:#007bff; color:#fff; border:none; padding:0.5rem 0.9rem; border-radius:8px; cursor:pointer; font-weight:600 }
+.btn-add:hover{ background:#0062d1; transform:translateY(-2px) }
+
+
 /* 🧱 Grid general del catálogo (si quieres usar aquí o en ItemListContainer.css) */
 .item-grid {
   display: grid;
@@ -94,4 +100,5 @@
   .item-price {
     font-size: 1rem;
   }
+  .item-actions{ flex-direction:column; gap:0.5rem }
 }

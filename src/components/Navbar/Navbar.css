@@ -1,3 +1,267 @@
+/* Navbar base */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--navbar-bg, #ffffff);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  position: relative;
+  z-index: 900;
+}
+
+.logo a { text-decoration: none; color: inherit; font-weight: 700; }
+
+/* Variables globales para fácil personalización */
+:root{
+  --accent: #ff6600;
+  --navbar-bg: #ffffff;
+  --hamburger-color: #222222;
+}
+
+.navbar .nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.navbar .nav-links li {
+  position: relative;
+}
+.navbar .nav-links a {
+  color: var(--color-text);
+  font-weight: 600;
+  text-decoration: none;
+  padding: 8px 12px;
+  transition: color 0.2s, transform 0.2s;
+}
+.hamburger{
+  display: none;
+  background: none;
+  border: none;
+  padding: 0.4rem;
+  cursor: pointer;
+}
+.hamburger:focus{ outline: 2px solid var(--accent, #667eea); border-radius:4px }
+.hamburger-box{ display:inline-block; width:28px; height:18px; position:relative }
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after{
+  display:block; background:var(--hamburger-color); height:2px; width:100%; border-radius:2px; position:absolute; transition:transform .25s ease, opacity .2s linear; left:0
+}
+.hamburger-inner{ top:50%; transform:translateY(-50%) }
+.hamburger-inner::before{ content:""; top:-8px }
+.hamburger-inner::after{ content:""; top:8px }
+.nav-links.open{ display:flex }
+
+/* Transformación de la hamburguesa a cruz */
+.hamburger.is-active .hamburger-inner{ background: transparent }
+.hamburger.is-active .hamburger-inner::before{ transform: translateY(8px) rotate(45deg); }
+.hamburger.is-active .hamburger-inner::after{ transform: translateY(-8px) rotate(-45deg); }
+
+/* Floating cart button */
+.cart-fab{
+  position: fixed;
+  right: 16px;
+  bottom: 18px;
+  background: var(--accent, #ff6600);
+  color: #fff;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  text-decoration: none;
+  z-index: 1401;
+  overflow: visible;
+  border: none;
+  outline: none;
+}
+.cart-fab { transition: opacity .22s cubic-bezier(.2,.9,.2,1), transform .18s ease; }
+.cart-fab .cart-fab-count{ position:absolute; top:-8px; right:-8px; background: var(--accent, #ff6600); color:#fff; font-size:11px; padding:3px 7px; border-radius:12px; min-width:22px; text-align:center; border: none; box-shadow: none }
+
+.cart-fab:focus,
+.cart-fab:focus-visible{
+  outline: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08); /* softer focus shadow */
+}
+
+/* Responsive rules */
+@media (max-width: 768px){
+  .nav-links{ display: none; }
+  .hamburger{ display: inline-block }
+  /* When opened, make menu a vertical panel */
+  /* slide/fade animation for mobile menu */
+  .nav-links{
+    flex-direction: column;
+    gap: 0.5rem;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: var(--navbar-bg, #fff);
+    padding: 0.5rem 1rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transition: opacity .22s ease, transform .22s ease, max-height .25s ease;
+    transform: translateY(-6px);
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    display: flex;
+  }
+  .nav-links.open{
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 400px;
+    display: flex;
+  }
+  /* Hide the inline cart link in the menu on very small screens (we have FAB) */
+  .nav-cart{ display: none }
+}
+
+/* Mini cart panel styles */
+.mini-cart-wrapper{
+  position: fixed;
+  right: 20px;
+  bottom: 90px; /* above the FAB */
+  z-index: 1200;
+}
+.mini-cart{
+  width: 320px;
+  max-height: 60vh;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  /* entrada animada */
+  animation: miniCartIn .18s cubic-bezier(.2,.9,.2,1) both;
+}
+
+@keyframes miniCartIn{
+  from{ opacity: 0; transform: translateY(10px) scale(.98) }
+  to{ opacity: 1; transform: translateY(0) scale(1) }
+}
+
+/* Backdrop */
+.mini-cart-backdrop{
+  position: fixed; inset: 0; background: rgba(0,0,0,0.18); z-index: 1190; animation: fadeIn .14s ease both;
+}
+@keyframes fadeIn{ from{ opacity: 0 } to { opacity: 1 } }
+
+/* Animaciones de salida */
+.mini-cart.closing{ animation: miniCartOut .18s cubic-bezier(.2,.9,.2,1) both }
+@keyframes miniCartOut{ from{ opacity:1; transform: translateY(0) scale(1) } to{ opacity:0; transform: translateY(8px) scale(.98) } }
+.mini-cart-backdrop.closing{ animation: fadeOut .14s ease both }
+@keyframes fadeOut{ from{ opacity: 1 } to { opacity: 0 } }
+.mini-cart-header{
+  display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border-bottom:3px solid var(--accent,#ff6600);
+}
+.mini-cart-close{ background:none; border:none; font-size:18px; cursor:pointer }
+.mini-cart-body{ padding: 8px; overflow:auto }
+.mini-cart-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px }
+.mini-cart-item{ display:flex; align-items:center; justify-content:space-between; gap:8px; padding:6px 8px; border-radius:6px }
+.mini-cart-item-name{ font-size:14px }
+.mini-cart-item-meta{ font-size:12px; color:#555 }
+.mini-cart-remove{ background:none; border:none; color:#cc0000; cursor:pointer }
+.mini-cart-summary{ padding:10px; border-top:1px solid #eee; display:flex; flex-direction:column; gap:8px }
+.mini-cart-actions{ display:flex; gap:8px; flex-wrap:wrap }
+.mini-cart .btn-clear, .mini-cart .btn-view-cart, .mini-cart .btn-checkout{
+  padding:6px 8px;
+  border-radius:6px;
+  text-decoration:none;
+  border:1px solid #ddd;
+  background:#fafafa;
+  cursor:pointer;
+  /* Tipografía consistente con la variable global */
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-base);
+  line-height: 1.2;
+  color: #222222;
+}
+.mini-cart-empty{
+  padding: 16px;
+  text-align: left;
+  color: #555;
+  font-size: 0.98rem;
+}
+.mini-cart .btn-checkout{
+  background:var(--accent,#ff6600);
+  color:#fff;
+  border:none;
+  font-weight: 400;
+}
+
+/* Mejor contraste para el botón 'Vaciar' */
+.mini-cart .btn-clear{
+  background:#ffffff;
+  color:#222222;
+  border:1px solid #d6d6d6;
+}
+.mini-cart .btn-clear:hover{ background:#f4f4f4 }
+
+/* Ajustes para 'Ver carrito' para diferenciarlo */
+.mini-cart .btn-view-cart{
+  background:#ffffff;
+  color:#222222;
+  border:1px solid #d6d6d6;
+}
+.mini-cart .btn-view-cart:hover{ background:#f6f6f6 }
+
+/* Asegurar que el contenido del mini-cart use la misma tipografía */
+.mini-cart, .mini-cart *{
+  font-family: inherit;
+}
+
+@media (max-width: 420px){
+  .mini-cart{ width: calc(100vw - 40px); right:10px; left:10px }
+  .mini-cart-wrapper{ right:10px; bottom: 80px }
+  /* centrar el wrapper en pantallas muy pequeñas */
+  .mini-cart-wrapper{ left:50%; transform: translateX(-50%); right:auto }
+}
+
+/* Ocultar FAB solo en pantallas pequeñas cuando el menú móvil está abierto */
+@media (max-width: 768px) {
+  .cart-fab.fab-hidden{ opacity: 0; transform: scale(.85); pointer-events: none }
+}
+
+/* Ensure hamburger is visible and positioned inside navbar on small screens */
+@media (max-width: 768px) {
+  .navbar { padding-left: 56px; }
+  .navbar .hamburger {
+    display: inline-flex !important;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1400;
+    background: transparent;
+  }
+  .navbar .logo { margin: 0 auto; }
+}
+
+/* Make sure FAB is not clipped and stays visible */
+.cart-fab{
+  right: 12px !important;
+  bottom: 18px !important;
+  z-index: 1401 !important;
+}
+@media (max-width: 420px){
+  .cart-fab{ right: calc(12px + env(safe-area-inset-right)); bottom: calc(12px + env(safe-area-inset-bottom)); }
+}
+
+/* Small polish for larger screens */
+@media (min-width: 769px){
+  .cart-fab{ right: 26px; bottom: 26px }
+}
 .navbar {
   background-color: var(--color-light);
   border-bottom: 1px solid var(--color-border);
@@ -58,13 +322,14 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .navbar ul {
+  .navbar .nav-links {
+    /* keep structural styles but DO NOT force display (we control visibility via .nav-links and .nav-links.open) */
     flex-direction: column;
     gap: 16px;
     padding: 12px 0;
   }
 
-  .navbar a {
+  .navbar .nav-links a {
     display: block;
     width: 100%;
     text-align: center;
@@ -82,4 +347,30 @@
   padding: 2px 7px;
   font-size: 0.8rem;
   margin-left: 5px;
+}
+
+/* Ensure hamburger is visible and above the fixed navbar on small screens */
+@media (max-width: 768px) {
+  .hamburger {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    z-index: 1302;
+    position: relative;
+  }
+  .hamburger-inner,
+  .hamburger-inner::before,
+  .hamburger-inner::after {
+    background: var(--hamburger-color, #222) !important;
+  }
+}
+
+/* Force center page titles used across views (catalog, cart, checkout) */
+.container h1,
+.list-header h1,
+.cart-container h2,
+.checkout-wrapper h2 {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }

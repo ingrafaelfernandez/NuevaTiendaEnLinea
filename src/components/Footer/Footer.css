@@ -6,6 +6,10 @@
   font-size: 0.95rem;
   border-top: 1px solid rgba(255,255,255,0.08);
   box-shadow: 0 -6px 18px rgba(0,0,0,0.06);
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 /* Más espacio en móviles y mejor lectura */
@@ -13,5 +17,8 @@
   .footer {
     padding: 18px 12px;
     font-size: 0.9rem;
+    /* Asegurar que cubre todo el ancho en móviles */
+    width: 100%;
+    max-width: 100vw;
   }
 }

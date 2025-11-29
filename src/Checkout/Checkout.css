@@ -46,12 +46,27 @@
   gap: 2rem;
   max-width: 1000px;
   width: 100%;
+  align-items: flex-start;
 }
 .checkout-summary, .payment-methods, .checkout-confirmation {
   background: #fff;
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Ensure form controls inside checkout take full width and are touch-friendly */
+.checkout-summary input,
+.checkout-summary select,
+.checkout-summary textarea,
+.payment-methods input,
+.payment-methods select,
+.payment-methods textarea,
+.checkout-confirmation input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.6rem;
+  font-family: inherit;
 }
 .summary-items, .confirmation-items {
   display: flex;
@@ -80,6 +95,8 @@
   display: flex;
   justify-content: space-between;
   margin-top: 1rem;
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 .btn-pay.disabled {
   background: #ccc;
@@ -227,6 +244,18 @@
   transition: all 0.3s ease;
 }
 
+/* Prevent overflow in flex containers */
+.btn-back-cart, .btn-pay, .btn-confirm, .btn-cancel {
+  min-width: 0;
+  box-sizing: border-box;
+  max-width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 600;
+}
+
 .btn-back-cart:hover {
   background-color: #555;
   transform: translateX(-3px);
@@ -366,14 +395,17 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
+  /* Stack columns into a single column for tablet and smaller */
   .checkout-wrapper {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: stretch;
   }
 
-  .checkout-summary {
-    position: relative;
-    top: auto;
+  .checkout-summary,
+  .payment-methods,
+  .checkout-confirmation {
+    width: 100%;
   }
 }
 
@@ -411,6 +443,15 @@
   .radio-button {
     margin-left: 0;
   }
+
+  /* Make action buttons full width on mobile */
+  .checkout-actions .btn-back-cart,
+  .checkout-actions .btn-pay,
+  .checkout-actions .btn-confirm,
+  .checkout-actions .btn-cancel {
+    width: 100%;
+    max-width: none;
+  }
 }
 
 @media (max-width: 480px) {
@@ -440,5 +481,13 @@
   .btn-back-cart,
   .btn-pay {
     padding: 0.8rem 1rem;
+  }
+
+  /* Slightly smaller buttons and tighter spacing on very small screens */
+  .payment-card h4 { font-size: 1rem }
+  .payment-card p { font-size: 0.85rem }
+  .btn-pay, .btn-back-cart, .btn-confirm, .btn-cancel {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.8rem;
   }
 }
